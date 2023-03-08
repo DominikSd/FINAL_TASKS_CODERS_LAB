@@ -42,7 +42,7 @@ public class ShopTest {
         buyClothes.pickSweater();
 
         CustomizeOrder customizeOrder = new CustomizeOrder(driver);
-        customizeOrder.sizeAndQuantity("L","7");
+        customizeOrder.sizeAndQuantity("XL",5);
         customizeOrder.addToCart();
         customizeOrder.proceedToCheckout();
 
