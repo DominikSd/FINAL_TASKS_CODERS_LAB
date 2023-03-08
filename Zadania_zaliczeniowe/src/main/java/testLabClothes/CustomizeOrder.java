@@ -5,7 +5,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.InputMismatchException;
 import java.util.Objects;
 
@@ -19,12 +23,14 @@ public class CustomizeOrder {
 
     @FindBy(className = "form-control-select")
     private WebElement sizeOption;
-    @FindBy(id = "quantity_wanted")
-    private WebElement quantityNr;
+    @FindBy(className = "touchspin-up")
+    private WebElement quantityUp;
     @FindBy(className = "add-to-cart")
     private WebElement cartButton;
+    @FindBy(css = ".product-variants-item > .control-label")
+    private WebElement sizeChecker;
 
-    public void sizeAndQuantity(String Size, String quantity) {
+    public void sizeAndQuantity(String Size, int quantity) {
         sizeOption.click();
         if (Objects.equals(Size, "S")) {
            driver.findElement(By.xpath("//*[@id=\"group_1\"]/option[@title=\"S\"]")).click();
@@ -36,9 +42,11 @@ public class CustomizeOrder {
         } else if (Objects.equals(Size, "XL")) {
             driver.findElement(By.xpath("//*[@id=\"group_1\"]/option[@title=\"XL\"]")).click();
         } else throw new IllegalArgumentException("Pick one of these: S / M / L / XL");
-        quantityNr.click();
-        quantityNr.clear();
-        quantityNr.sendKeys(quantity);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.textToBePresentInElement(sizeChecker, "Size: " + Size));
+        for (int i = 1; i < quantity; i++) {
+            quantityUp.click();
+        }
     }
 
     public void addToCart() {
