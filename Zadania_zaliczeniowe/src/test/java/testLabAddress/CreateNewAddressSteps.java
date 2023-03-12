@@ -8,17 +8,29 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import testLabAccount.AddNewAddress;
 import testLabAccount.FilltheForm;
 import testLabAccount.SaveAndCheck;
 import testLabMainPage.MainPageLogin;
 import java.time.Duration;
 public class CreateNewAddressSteps {
-    private WebDriver driver;
+
+    WebDriver driver = null;
+
     @Before
     public void setup() {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-        driver = new ChromeDriver();
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable notifications");
+        DesiredCapabilities cp = new DesiredCapabilities();
+        cp.setCapability(ChromeOptions.CAPABILITY, options);
+        options.merge(cp);
+
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://mystore-testlab.coderslab.pl/index.php");

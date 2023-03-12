@@ -20,6 +20,6 @@ public class CheckForRabat {
         if (Objects.equals(discountSweater.getText(), negativeAmountInPercent)) {
             System.out.println("+");
         }else System.out.println("-");
-        return "Discount for this product is " + negativeAmountInPercent;
+        return "Discount for this product is " + discountSweater.getText();
     }
 }

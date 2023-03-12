@@ -8,14 +8,13 @@ import org.openqa.selenium.support.PageFactory;
 public class MainPageLogin {
 
     private WebDriver driver;
+    @FindBy(css = "div#_desktop_user_info .hidden-sm-down")
+    private WebElement signIn;
 
     public MainPageLogin(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
-    @FindBy(css = "div#_desktop_user_info .hidden-sm-down")
-    private WebElement signIn;
 
 
     public void signClick() {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/FINAL_TASKS_CODERS_LAB.iml" filepath="$PROJECT_DIR$/.idea/FINAL_TASKS_CODERS_LAB.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Zadania_zaliczeniowe/Zadania_zaliczeniowe.iml" filepath="$PROJECT_DIR$/Zadania_zaliczeniowe/Zadania_zaliczeniowe.iml" />
+    </modules>
+  </component>
+</project>

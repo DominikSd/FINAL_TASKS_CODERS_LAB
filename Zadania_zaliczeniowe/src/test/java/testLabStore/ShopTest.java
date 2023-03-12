@@ -6,6 +6,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import shippingPersonalization.AddressCheck;
 import shippingPersonalization.PaymentOptions;
 import shippingPersonalization.ShippingMethod;
@@ -19,10 +21,17 @@ import java.io.IOException;
 import java.time.Duration;
 
 public class ShopTest {
-
     public static void main(String[] args) throws IOException {
         System.setProperty("webdriver.chrome.driver", "src/main/resources/drivers/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        options.addArguments("--disable notifications");
+        DesiredCapabilities cp = new DesiredCapabilities();
+        cp.setCapability(ChromeOptions.CAPABILITY, options);
+        options.merge(cp);
+
+        WebDriver driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.get("https://mystore-testlab.coderslab.pl/index.php");
@@ -36,7 +45,7 @@ public class ShopTest {
         navigateToClothesPage.clothesClick();
 
         CheckForRabat checkForRabat = new CheckForRabat(driver);
-        System.out.println(checkForRabat.discountCheck("-20%"));
+        System.out.println(checkForRabat.discountCheck("-25%"));
 
         BuyClothes buyClothes = new BuyClothes(driver);
         buyClothes.pickSweater();
