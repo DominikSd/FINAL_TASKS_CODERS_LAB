@@ -72,10 +72,6 @@ public class ShopTest {
 
         File f = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         Files.copy(f,new File("C:\\Users\\Dominik\\Downloads\\sample\\testLabScreenshot.jpg"));
-
-
-
-
         driver.quit();
     }
 }
